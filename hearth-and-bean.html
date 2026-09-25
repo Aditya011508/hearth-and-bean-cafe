@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hearth & Bean — Neighborhood Coffeehouse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Karla:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F3E9D8;
+    --bg-alt: #EADFC8;
+    --ink: #362A20;
+    --ink-soft: #5B4A3B;
+    --green: #3F5E45;
+    --green-deep: #2E4633;
+    --gold: #B5741F;
+    --line: rgba(54, 42, 32, 0.16);
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #221B15; --bg-alt: #2B221A; --ink: #F1E7D6; --ink-soft: #C9BBA5;
+      --green: #7FA083; --green-deep: #9BBE9E; --gold: #D8A24E; --line: rgba(241,231,214,0.14);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #221B15; --bg-alt: #2B221A; --ink: #F1E7D6; --ink-soft: #C9BBA5;
+    --green: #7FA083; --green-deep: #9BBE9E; --gold: #D8A24E; --line: rgba(241,231,214,0.14);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Karla', sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 48px); }
+
+  header.site {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  header.site .wrap { display: flex; align-items: center; justify-content: space-between; padding-top: 18px; padding-bottom: 18px; }
+  .wordmark { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 600; color: var(--green-deep); }
+  nav ul { list-style: none; display: flex; gap: clamp(16px, 3vw, 32px); }
+  nav a { color: var(--ink-soft); text-decoration: none; font-size: 0.95rem; font-weight: 500; }
+  nav a:hover, nav a:focus-visible { color: var(--green-deep); }
+
+  .hero { padding: clamp(56px, 10vw, 108px) 0 clamp(40px, 8vw, 80px); }
+  .hero .wrap { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(24px, 5vw, 56px); align-items: center; }
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(2.6rem, 6vw, 4.3rem);
+    line-height: 1.03;
+    color: var(--ink);
+    max-width: 11ch;
+  }
+  .hero p.lede { margin-top: 22px; max-width: 42ch; font-size: 1.1rem; color: var(--ink-soft); }
+  .hero .cta-row { margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: 13px 26px; border-radius: 3px;
+    font-weight: 600; font-size: 0.95rem; text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-solid { background: var(--green-deep); color: var(--bg); }
+  .btn-outline { border: 1px solid var(--ink); color: var(--ink); }
+
+  .cup-illustration { width: 100%; max-width: 320px; margin-inline: auto; }
+  .steam { animation: rise 4s ease-in-out infinite; transform-origin: bottom; }
+  .steam.s2 { animation-delay: 0.9s; }
+  .steam.s3 { animation-delay: 1.7s; }
+  @keyframes rise {
+    0% { opacity: 0; transform: translateY(0) scaleY(0.8); }
+    30% { opacity: 0.55; }
+    75% { opacity: 0.15; }
+    100% { opacity: 0; transform: translateY(-26px) scaleY(1.15); }
+  }
+  @media (prefers-reduced-motion: reduce) { .steam { animation: none; opacity: 0.35; } }
+
+  section { padding: clamp(48px, 8vw, 88px) 0; border-top: 1px solid var(--line); }
+  .section-head { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 32px; margin-bottom: clamp(32px, 6vw, 52px); }
+  .section-head h2 { font-family: 'Fraunces', serif; font-weight: 500; font-size: clamp(1.8rem, 3.4vw, 2.4rem); }
+  .section-head .intro { color: var(--ink-soft); max-width: 46ch; align-self: end; }
+
+  .about .wrap { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(28px, 6vw, 60px); align-items: start; }
+  .about p { color: var(--ink-soft); font-size: 1.03rem; }
+  .about p + p { margin-top: 14px; }
+  .about .stat-row { display: flex; gap: clamp(20px, 4vw, 40px); margin-top: 26px; }
+  .stat b { font-family: 'Fraunces', serif; font-size: 1.7rem; color: var(--green-deep); display: block; }
+  .stat span { font-size: 0.85rem; color: var(--ink-soft); }
+
+  .menu { background: var(--bg-alt); }
+  .menu-cols { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 6vw, 56px); }
+  .menu-group h3 { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.15rem; color: var(--green-deep); margin-bottom: 16px; }
+  .menu-item { display: flex; align-items: baseline; gap: 8px; padding: 11px 0; border-bottom: 1px dashed var(--line); }
+  .menu-item .name { font-weight: 600; }
+  .menu-item .desc { color: var(--ink-soft); font-size: 0.88rem; display: block; margin-top: 2px; }
+  .menu-item .fill { flex: 1; border-bottom: 1px dotted var(--line); margin: 0 6px 4px; }
+  .menu-item .price { color: var(--gold); font-weight: 600; white-space: nowrap; }
+
+  .visit .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 6vw, 56px); }
+  .visit dl { display: grid; grid-template-columns: auto 1fr; gap: 10px 20px; }
+  .visit dt { color: var(--ink-soft); font-size: 0.9rem; }
+  .visit dd { font-weight: 600; }
+  .visit .map-sketch { border: 1px solid var(--line); border-radius: 4px; padding: 18px; }
+
+  footer.contact { background: var(--green-deep); color: var(--bg); border-top: none; }
+  footer.contact h2 { font-family: 'Fraunces', serif; font-weight: 500; font-size: clamp(1.7rem, 3.6vw, 2.3rem); max-width: 16ch; }
+  footer.contact .row { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: clamp(24px, 5vw, 48px); align-items: center; }
+  footer.contact p { color: color-mix(in srgb, var(--bg) 80%, transparent); margin-top: 14px; max-width: 42ch; }
+  footer.contact .card { background: color-mix(in srgb, var(--bg) 8%, transparent); border: 1px solid color-mix(in srgb, var(--bg) 25%, transparent); border-radius: 4px; padding: 24px clamp(20px,4vw,28px); }
+  footer.contact .card .label { font-size: 0.8rem; text-transform: none; color: color-mix(in srgb, var(--bg) 65%, transparent); }
+  footer.contact .card .name { font-family: 'Fraunces', serif; font-size: 1.3rem; margin-top: 4px; }
+  footer.contact .card a { color: var(--bg); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+  footer.contact .fine { margin-top: 40px; font-size: 0.82rem; color: color-mix(in srgb, var(--bg) 55%, transparent); border-top: 1px solid color-mix(in srgb, var(--bg) 20%, transparent); padding-top: 20px; }
+
+  @media (max-width: 760px) {
+    .hero .wrap, .about .wrap, .menu-cols, .visit .wrap, footer.contact .row, .section-head { grid-template-columns: 1fr !important; }
+    .hero .cup-illustration { order: -1; max-width: 220px; }
+    nav ul { gap: 14px; font-size: 0.9rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <div class="wordmark">Hearth & Bean</div>
+    <nav>
+      <ul>
+        <li><a href="#about">Story</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#visit">Visit</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Slow mornings, well-brewed.</h1>
+      <p class="lede">A small corner coffeehouse for people who like their coffee unhurried, their pastries warm, and their booth by the window.</p>
+      <div class="cta-row">
+        <a href="#menu" class="btn btn-solid">See the menu</a>
+        <a href="#visit" class="btn btn-outline">Find us</a>
+      </div>
+    </div>
+    <svg class="cup-illustration" viewBox="0 0 240 260" xmlns="http://www.w3.org/2000/svg">
+      <path class="steam s1" d="M95 70 C 85 55, 105 45, 95 30" stroke="var(--ink-soft)" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path class="steam s2" d="M120 70 C 110 55, 130 45, 120 28" stroke="var(--ink-soft)" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path class="steam s3" d="M145 70 C 135 55, 155 45, 145 30" stroke="var(--ink-soft)" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M40 95 h145 l-10 95 a20 20 0 0 1 -20 18 H70 a20 20 0 0 1 -20 -18 Z" fill="var(--green-deep)" opacity="0.92"/>
+      <path d="M185 105 q35 0 35 32 t-35 32" fill="none" stroke="var(--green-deep)" stroke-width="9"/>
+      <ellipse cx="112" cy="95" rx="72" ry="10" fill="var(--gold)"/>
+      <rect x="30" y="215" width="170" height="10" rx="5" fill="var(--ink)" opacity="0.75"/>
+    </svg>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="section-head" style="grid-template-columns:1fr; margin-bottom:0;">
+      <h2>Our story</h2>
+    </div>
+    <div>
+      <p>Hearth & Bean started as a single roaster and six mismatched chairs. The idea was simple: source coffee we'd want to drink ourselves, and give the neighborhood a room worth lingering in.</p>
+      <p>Everything on the counter is made the same morning it's served — beans roasted in small batches, pastries from the oven two doors down, and a playlist that never gets louder than conversation.</p>
+      <div class="stat-row">
+        <div class="stat"><b>6am</b><span>doors open daily</span></div>
+        <div class="stat"><b>3</b><span>single-origin roasts</span></div>
+        <div class="stat"><b>2015</b><span>since</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="menu" id="menu">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>On the counter</h2>
+      <p class="intro">A short menu, changed with the seasons. Ask what's fresh — the chalkboard by the register usually knows more than we do.</p>
+    </div>
+    <div class="menu-cols">
+      <div class="menu-group">
+        <h3>Coffee</h3>
+        <div class="menu-item"><span class="name">Drip, house blend<span class="desc">Medium roast, changes weekly</span></span><span class="fill"></span><span class="price">$3.50</span></div>
+        <div class="menu-item"><span class="name">Cortado<span class="desc">Equal parts espresso and steamed milk</span></span><span class="fill"></span><span class="price">$4.25</span></div>
+        <div class="menu-item"><span class="name">Pour-over<span class="desc">Single origin, brewed to order</span></span><span class="fill"></span><span class="price">$5.50</span></div>
+        <div class="menu-item"><span class="name">Iced oat latte<span class="desc">Double shot, house oat milk</span></span><span class="fill"></span><span class="price">$5.00</span></div>
+      </div>
+      <div class="menu-group">
+        <h3>From the oven</h3>
+        <div class="menu-item"><span class="name">Brown butter croissant</span><span class="fill"></span><span class="price">$4.00</span></div>
+        <div class="menu-item"><span class="name">Fig & rosemary scone</span><span class="fill"></span><span class="price">$4.50</span></div>
+        <div class="menu-item"><span class="name">Olive oil cake<span class="desc">Slice, with citrus glaze</span></span><span class="fill"></span><span class="price">$5.25</span></div>
+        <div class="menu-item"><span class="name">Morning toast<span class="desc">Sourdough, seasonal topping</span></span><span class="fill"></span><span class="price">$6.50</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="wrap">
+    <div>
+      <div class="section-head" style="grid-template-columns:1fr; margin-bottom:24px;">
+        <h2>Visit</h2>
+      </div>
+      <dl>
+        <dt>Hours</dt><dd>Mon–Fri, 6am–4pm</dd>
+        <dt>Weekend</dt><dd>Sat–Sun, 7am–5pm</dd>
+        <dt>Address</dt><dd>14 Maple Row, off the town square</dd>
+        <dt>Seating</dt><dd>Window counter, courtyard in summer</dd>
+      </dl>
+    </div>
+    <div class="map-sketch">
+      <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="0" y="0" width="300" height="180" fill="none"/>
+        <path d="M10 150 H290 M60 150 V20 M180 150 V60 H260 V150" stroke="var(--line)" stroke-width="2" fill="none"/>
+        <circle cx="60" cy="95" r="8" fill="var(--gold)"/>
+        <text x="76" y="99" font-family="Karla, sans-serif" font-size="12" fill="var(--ink-soft)">Hearth & Bean</text>
+        <text x="14" y="168" font-family="Karla, sans-serif" font-size="11" fill="var(--ink-soft)">Maple Row</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<footer class="contact">
+  <div class="wrap">
+    <div class="row">
+      <div>
+        <h2>Like this look for your own restaurant?</h2>
+        <p>This page is a design sample — built to show what a small restaurant or café site could feel like. If you'd like one for your place, I design and build them.</p>
+      </div>
+      <div class="card">
+        <div class="label">Designed by</div>
+        <div class="name">Aditya Mishra</div>
+        <p style="margin-top:10px; color:inherit;"><a href="mailto:sikannnnnn0115@gmail.com">sikannnnnn0115@gmail.com</a></p>
+      </div>
+    </div>
+    <div class="fine">Hearth & Bean is a fictional café created as a design demo. Menu, hours, and address are for illustration only.</div>
+  </div>
+</footer>
+
+</body>
+</html>
